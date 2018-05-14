@@ -1,0 +1,66 @@
+const BaseService = require('./BaseService');
+const ApiUrls = require('../helpers/ApiUrls');
+const UrlHelper = require('../helpers/UrlHelper');
+const moment = require('moment');
+
+class CustomerService extends BaseService {
+  createCustomer(payload) {
+    return this.api.post(ApiUrls.customers(), payload);
+  }
+
+  updateCustomer(customerId, payload) {
+    let apiUrl = ApiUrls.customer(customerId);
+
+    if (customerId.includes('@')) {
+      apiUrl = ApiUrls.customerEmail(customerId);
+    }
+
+    return this.api.put(apiUrl, payload);
+  }
+
+  getCustomer(customerId) {
+    const apiUrl = ApiUrls.customer(customerId);
+
+    if (customerId.contains('@')) {
+      apiUrl = ApiUrls.customerEmail(customerId);
+    }
+
+    return this.api.get(apiUrl);
+  }
+
+  getCustomerList(payload) {
+    const apiUrl = ApiUrls.customers();
+
+    if (payload && payload.count && payload.count > 0) {
+      apiUrl = UrlHelper.addParameterToUrl(apiUrl, 'count', +payload.count);
+    }
+
+    if (payload && payload.offset && payload.offset > 0) {
+      apiUrl = UrlHelper.addParameterToUrl(apiUrl, 'offset', +payload.offset);
+    }
+
+    if (payload && payload.fromDate) {
+      apiUrl = UrlHelper.addParameterToUrl(
+        apiUrl,
+        'fromDate',
+        moment.utc(payload.fromDate).toString(),
+      );
+    }
+
+    if (payload && payload.toDate) {
+      apiUrl = UrlHelper.addParameterToUrl(
+        apiUrl,
+        'toDate',
+        moment.utc(payload.toDate).toString(),
+      );
+    }
+
+    return this.api.get(apiUrl);
+  }
+
+  deleteCustomer(customerId) {
+    return this.api.delete(ApiUrls.customer(customerId));
+  }
+}
+
+module.exports = CustomerService;
