@@ -21,7 +21,7 @@ class CustomerService extends BaseService {
   getCustomer(customerId) {
     const apiUrl = ApiUrls.customer(customerId);
 
-    if (customerId.contains('@')) {
+    if (customerId.includes('@')) {
       apiUrl = ApiUrls.customerEmail(customerId);
     }
 
