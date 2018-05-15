@@ -21,6 +21,10 @@ class CardService extends BaseService {
   deleteCard(customerId, cardId) {
     return this.api.delete(ApiUrls.card(customerId, cardId));
   }
+
+  getCardToken(payload, customKey) {
+    return this.api.post(ApiUrls.cardTokens(), payload, customKey)
+  }
 }
 
 module.exports = CardService;

@@ -26,7 +26,8 @@ const ApiUrls = {
 	binlookup: (bin) => `lookups/bins/${bin}`,
 	binlookupCardtoken: (token) => `tokens/${token}`,
 
-	payouts: () => `payouts`
+	payouts: () => `payouts`,
+	cardTokens: () => `tokens/card`
 }
 
 module.exports = ApiUrls;
