@@ -14,6 +14,7 @@ class ApiHttpClient {
         'content-type': 'application/json',
         'Authorization': customKey || this.apiKey,
       },
+      method
     };
 
     if (payload) {
