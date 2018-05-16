@@ -30,22 +30,22 @@ module.exports = {
     return address;
   },
   getRandomProducts() {
-    const product1 = new Product();
-    product1.description = getRandomString({ length: 20 });
-    product1.name = getRandomString({ length: 20 });
+    const product1 = {};
+    product1.description = this.getRandomString({ length: 20 });
+    product1.name = this.getRandomString({ length: 20 });
     product1.quantity = 1;
     product1.shippingCost = 10.5;
     product1.price = 10;
-    product1.sku = getRandomString({ length: 25 });
+    product1.sku = this.getRandomString({ length: 25 });
     product1.trackingUrl = 'http://www.tracker.com';
 
-    const product2 = new Product();
-    product2.description = getRandomString({ length: 20 });
-    product2.name = getRandomString({ length: 20 });
+    const product2 = {};
+    product2.description = this.getRandomString({ length: 20 });
+    product2.name = this.getRandomString({ length: 20 });
     product1.price = 10;
     product2.quantity = 1;
     product2.shippingCost = 20.2;
-    product2.sku = getRandomString({ length: 25 });
+    product2.sku = this.getRandomString({ length: 25 });
     product2.trackingUrl = 'http://www.tracker.com';
 
     return [product1, product2];

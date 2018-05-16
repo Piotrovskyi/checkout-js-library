@@ -29,7 +29,7 @@ class CustomerService extends BaseService {
   }
 
   getCustomerList(payload) {
-    const apiUrl = ApiUrls.customers();
+    let apiUrl = ApiUrls.customers();
 
     if (payload && payload.count && payload.count > 0) {
       apiUrl = UrlHelper.addParameterToUrl(apiUrl, 'count', +payload.count);
@@ -43,7 +43,7 @@ class CustomerService extends BaseService {
       apiUrl = UrlHelper.addParameterToUrl(
         apiUrl,
         'fromDate',
-        moment.utc(payload.fromDate).toString(),
+        moment.utc(payload.fromDate).format("YYYY-MM-DDTHH:mm:ss[Z]").toString(),
       );
     }
 
@@ -51,7 +51,7 @@ class CustomerService extends BaseService {
       apiUrl = UrlHelper.addParameterToUrl(
         apiUrl,
         'toDate',
-        moment.utc(payload.toDate).toString(),
+        moment.utc(payload.toDate).format("YYYY-MM-DDTHH:mm:ss[Z]").toString(),
       );
     }
 
