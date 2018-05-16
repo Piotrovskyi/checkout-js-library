@@ -2,7 +2,6 @@ const assert = require('chai').assert;
 const APIClient = require('../ApiClient');
 const testHelper = require('./testHelper');
 
-
 describe('Card service tests', function() {
   let client, customerPayload, customerResponse, customerId;
 
@@ -37,7 +36,6 @@ describe('Card service tests', function() {
     assert.isNotNull(cardResponse.fingerprint);
   };
 
-
   before(async function() {
     client = new APIClient({ secretKey: testHelper.secretKey });
     customerPayload = testHelper.getCustomerCreateModel();
@@ -71,12 +69,43 @@ describe('Card service tests', function() {
   });
 
   it('Get card', async function() {
-		const cardCreatePayload= testHelper.getCardCreateModel();
-		const cardCreateResponse = await client.cardService.createCard(customerId, cardCreatePayload);
+    const cardCreatePayload = testHelper.getCardCreateModel();
+    const cardCreateResponse = await client.cardService.createCard(
+      customerId,
+      cardCreatePayload,
+    );
 
-		const cardResponse = await client.cardService.getCard(customerId, cardCreateResponse.data.id);
+    const cardResponse = await client.cardService.getCard(
+      customerId,
+      cardCreateResponse.data.id,
+    );
 
-		assert.equal(200, cardResponse.status);
-		validateCard(cardCreatePayload, cardResponse.data);
+    assert.equal(200, cardResponse.status);
+    validateCard(cardCreatePayload, cardResponse.data);
+  });
+
+  it('Get card list', async function() {
+    const cardCreatePayload = testHelper.getCardCreateModel();
+
+    const cardListResponse = await client.cardService.getCardList(customerId);
+
+    assert.equal(200, cardListResponse.status);
+    assert.equal(cardListResponse.data.count, 2);
+  });
+
+  it('Delete card', async function() {
+    const cardCreatePayload = testHelper.getCardCreateModel();
+    const cardCreateResponse = await client.cardService.createCard(
+      customerId,
+      cardCreatePayload,
+    );
+
+    const cardResponse = await client.cardService.deleteCard(
+      customerId,
+      cardCreateResponse.data.id,
+    );
+
+    assert.equal(200, cardResponse.status);
+    assert.equal(cardResponse.data.message, 'ok');
   });
 });

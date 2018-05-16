@@ -6,7 +6,7 @@ module.exports = {
   getRandomString({ possible = 'abcdefghijklmnopqrstuvwxyz', length = 26 } = {}) {
     let text = '';
 
-    for (var i = 0; i < 5; i++)
+    for (var i = 0; i < length; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
@@ -94,8 +94,8 @@ module.exports = {
     const cardUpdate = {};
 
     cardUpdate.name = this.getRandomString();
-    cardUpdate.expiryMonth = '06';
-    cardUpdate.expiryYear = '2020';
+    cardUpdate.expiryMonth = '07';
+    cardUpdate.expiryYear = '2018';
     cardUpdate.billingDetails = this.getRandomAddress();
     cardUpdate.defaultCard = true;
 
@@ -122,161 +122,179 @@ module.exports = {
   },
   getCardChargeModel() {
     const cardCharge = this.getBaseChargeModel();
-		cardCharge.transactionIndicator = "1";
-		cardCharge.card =this.getCardCreateModel();
+    cardCharge.transactionIndicator = '1';
+    cardCharge.card = this.getCardCreateModel();
 
-		return  cardCharge;
+    return cardCharge;
   },
   getCardChargeModel3ds() {
     const cardCharge = this.getBaseChargeModel();
-    cardCharge.transactionIndicator = "1";
-		cardCharge.chargeMode = 2;
-		cardCharge.card =this.getCardCreateModel();
+    cardCharge.transactionIndicator = '1';
+    cardCharge.chargeMode = 2;
+    cardCharge.card = this.getCardCreateModel();
 
-		return  cardCharge;
+    return cardCharge;
   },
   getCardChargeModelAttemptN3d() {
     const cardCharge = this.getBaseChargeModel();
-    cardCharge.value = "100150"; // To trigger "Card not 3DS Enabled" https://docs.checkout.com/getting-started/testing-and-simulating-charges
+    cardCharge.value = '100150'; // To trigger "Card not 3DS Enabled" https://docs.checkout.com/getting-started/testing-and-simulating-charges
 
-    cardCharge.transactionIndicator = "1";
+    cardCharge.transactionIndicator = '1';
     cardCharge.chargeMode = 2;
     cardCharge.attemptN3D = true;
-    cardCharge.card =this.getCardCreateModel();
-    cardCharge.card.number = "378282246310005"; // We need to use a test card other than Visa, else normal 10000 response code will be returned
-    cardCharge.card.expiryMonth = "06";
-    cardCharge.card.expiryYear = "2018";
-    cardCharge.card.cvv = "1000";
+    cardCharge.card = this.getCardCreateModel();
+    cardCharge.card.number = '378282246310005'; // We need to use a test card other than Visa, else normal 10000 response code will be returned
+    cardCharge.card.expiryMonth = '06';
+    cardCharge.card.expiryYear = '2018';
+    cardCharge.card.cvv = '1000';
 
-    return  cardCharge;
+    return cardCharge;
   },
   getChargeUpdateModel() {
-		const chargeUpdate ={};
+    const chargeUpdate = {};
 
-		chargeUpdate.trackId= "TRK123456";
-		chargeUpdate.description= this.getRandomString({ length: 20 });
-		chargeUpdate.metadata = this.getRandomMetadata();
-		chargeUpdate.udf1=this.getRandomString({ length: 20 });
-		chargeUpdate.udf2=this.getRandomString({ length: 20 });
-		chargeUpdate.udf3=this.getRandomString({ length: 20 });
-		chargeUpdate.udf4=this.getRandomString({ length: 20 });
-		chargeUpdate.udf5=this.getRandomString({ length: 20 });
+    chargeUpdate.trackId = 'TRK123456';
+    chargeUpdate.description = this.getRandomString({ length: 20 });
+    chargeUpdate.metadata = this.getRandomMetadata();
+    chargeUpdate.udf1 = this.getRandomString({ length: 20 });
+    chargeUpdate.udf2 = this.getRandomString({ length: 20 });
+    chargeUpdate.udf3 = this.getRandomString({ length: 20 });
+    chargeUpdate.udf4 = this.getRandomString({ length: 20 });
+    chargeUpdate.udf5 = this.getRandomString({ length: 20 });
 
-		return  chargeUpdate;
+    return chargeUpdate;
   },
   getChargeVoidModel() {
-		const chargeVoid = this.getBaseChargeInfoModel();
-		chargeVoid.products = this.getRandomProducts();
-		return chargeVoid;
+    const chargeVoid = this.getBaseChargeInfoModel();
+    chargeVoid.products = this.getRandomProducts();
+    return chargeVoid;
   },
   getChargeCaptureModel() {
-		const chargeCapture = this.getBaseChargeInfoModel();
-		chargeCapture.products = this.getRandomProducts();
-		return chargeCapture;
+    const chargeCapture = this.getBaseChargeInfoModel();
+    chargeCapture.products = this.getRandomProducts();
+    return chargeCapture;
   },
   getChargeRefundModel() {
-		const chargeRefund = this.getBaseChargeInfoModel();
-		chargeRefund.products = this.getRandomProducts();
-		return chargeRefund;
+    const chargeRefund = this.getBaseChargeInfoModel();
+    chargeRefund.products = this.getRandomProducts();
+    return chargeRefund;
   },
   getCardIdChargeModel(cardId, customerEmail) {
-		const cardIdCharge = this.getBaseChargeModel();
-		cardIdCharge.transactionIndicator = "1";
-		cardIdCharge.cardId = cardId;
-		cardIdCharge.email = customerEmail;
+    const cardIdCharge = this.getBaseChargeModel();
+    cardIdCharge.transactionIndicator = '1';
+    cardIdCharge.cardId = cardId;
+    cardIdCharge.email = customerEmail;
 
-		return  cardIdCharge;
+    return cardIdCharge;
   },
   getCardTokenChargeModel(cardToken) {
-		const cardTokenCharge = this.getBaseChargeModel();
-		cardTokenCharge.transactionIndicator = "1";
-		cardTokenCharge.cardToken = cardToken;
-		return  cardTokenCharge;
+    const cardTokenCharge = this.getBaseChargeModel();
+    cardTokenCharge.transactionIndicator = '1';
+    cardTokenCharge.cardToken = cardToken;
+    return cardTokenCharge;
   },
   getDefaultCardChargeModel(email) {
-		const defaultCardCharge = this.getBaseChargeModel();
-		defaultCardCharge.transactionIndicator = "1";
-		defaultCardCharge.email = email;
+    const defaultCardCharge = this.getBaseChargeModel();
+    defaultCardCharge.transactionIndicator = '1';
+    defaultCardCharge.email = email;
 
-		return defaultCardCharge;
+    return defaultCardCharge;
   },
   getBaseChargeModel() {
     const baseCharge = {};
 
-		baseCharge.autoCapTime=0;
-		baseCharge.email = this.getRandomEmail();
-		baseCharge.currency="usd";
-		baseCharge.value="100";
-		baseCharge.autoCapture="N";
-		baseCharge.trackId= "TRK12345";
-		baseCharge.customerIp="82.23.168.254";
-		baseCharge.customerName = "Test Customer";
-    baseCharge.description= this.getRandomString({ length: 20 });
+    baseCharge.autoCapTime = 0;
+    baseCharge.email = this.getRandomEmail();
+    baseCharge.currency = 'usd';
+    baseCharge.value = '100';
+    baseCharge.autoCapture = 'N';
+    baseCharge.trackId = 'TRK12345';
+    baseCharge.customerIp = '82.23.168.254';
+    baseCharge.customerName = 'Test Customer';
+    baseCharge.description = this.getRandomString({ length: 20 });
 
-		baseCharge.descriptor = {};
-		baseCharge.descriptor.name = "Amigo ltd.";
-		baseCharge.descriptor.city = "London";
-		baseCharge.metadata = this.getRandomMetadata();
-		baseCharge.products = this.getRandomProducts();
-		baseCharge.shippingDetails = this.getRandomAddress();
-		baseCharge.udf1=this.getRandomString({ length: 20 });
-		baseCharge.udf2=this.getRandomString({ length: 20 });
-		baseCharge.udf3=this.getRandomString({ length: 20 });
-		baseCharge.udf4=this.getRandomString({ length: 20 });
-		baseCharge.udf5=this.getRandomString({ length: 20 });
+    baseCharge.descriptor = {};
+    baseCharge.descriptor.name = 'Amigo ltd.';
+    baseCharge.descriptor.city = 'London';
+    baseCharge.metadata = this.getRandomMetadata();
+    baseCharge.products = this.getRandomProducts();
+    baseCharge.shippingDetails = this.getRandomAddress();
+    baseCharge.udf1 = this.getRandomString({ length: 20 });
+    baseCharge.udf2 = this.getRandomString({ length: 20 });
+    baseCharge.udf3 = this.getRandomString({ length: 20 });
+    baseCharge.udf4 = this.getRandomString({ length: 20 });
+    baseCharge.udf5 = this.getRandomString({ length: 20 });
 
-		return baseCharge;
+    return baseCharge;
   },
   getBaseChargeInfoModel() {
-		const baseChargeInfo = {};
-		baseChargeInfo.trackId= "TRK12345";
-		baseChargeInfo.description= this.getRandomString({ length: 20 });
-		baseChargeInfo.metadata = this.getRandomMetadata();
-		baseChargeInfo.udf1=this.getRandomString({ length: 20 });
-		baseChargeInfo.udf2=this.getRandomString({ length: 20 });
-		baseChargeInfo.udf3=this.getRandomString({ length: 20 });
-		baseChargeInfo.udf4=this.getRandomString({ length: 20 });
-		baseChargeInfo.udf5=this.getRandomString({ length: 20 });
+    const baseChargeInfo = {};
+    baseChargeInfo.trackId = 'TRK12345';
+    baseChargeInfo.description = this.getRandomString({ length: 20 });
+    baseChargeInfo.metadata = this.getRandomMetadata();
+    baseChargeInfo.udf1 = this.getRandomString({ length: 20 });
+    baseChargeInfo.udf2 = this.getRandomString({ length: 20 });
+    baseChargeInfo.udf3 = this.getRandomString({ length: 20 });
+    baseChargeInfo.udf4 = this.getRandomString({ length: 20 });
+    baseChargeInfo.udf5 = this.getRandomString({ length: 20 });
 
-		return baseChargeInfo;
+    return baseChargeInfo;
   },
-  getQueryTransactionModel(searchValue, fromDate, toDate, sortColumn, sortOrder, pageSize, pageNumber, filters) {
-		const query = {};
+  getQueryTransactionModel(
+    searchValue,
+    fromDate,
+    toDate,
+    sortColumn,
+    sortOrder,
+    pageSize,
+    pageNumber,
+    filters,
+  ) {
+    const query = {};
 
-		query.fromDate = fromDate;
-		query.toDate = toDate;
-		query.pageSize = pageSize;
-		query.pageNumber = pageNumber;
-		query.sortColumn = sortColumn;
-		query.sortOrder = sortOrder;
-		query.search = searchValue;
-		query.filters = filters;
+    query.fromDate = fromDate;
+    query.toDate = toDate;
+    query.pageSize = pageSize;
+    query.pageNumber = pageNumber;
+    query.sortColumn = sortColumn;
+    query.sortOrder = sortOrder;
+    query.search = searchValue;
+    query.filters = filters;
 
-		return query;
+    return query;
   },
-  getQueryChargebackModel(searchValue, fromDate, toDate, sortColumn, sortOrder, pageSize, pageNumber, filters) {
-		const query = {};
+  getQueryChargebackModel(
+    searchValue,
+    fromDate,
+    toDate,
+    sortColumn,
+    sortOrder,
+    pageSize,
+    pageNumber,
+    filters,
+  ) {
+    const query = {};
 
-		query.fromDate = fromDate;
-		query.toDate = toDate;
-		query.pageSize = pageSize;
-		query.pageNumber = pageNumber;
-		query.sortColumn = sortColumn;
-		query.sortOrder = sortOrder;
-		query.search = searchValue;
-		query.filters = filters;
+    query.fromDate = fromDate;
+    query.toDate = toDate;
+    query.pageSize = pageSize;
+    query.pageNumber = pageNumber;
+    query.sortColumn = sortColumn;
+    query.sortOrder = sortOrder;
+    query.search = searchValue;
+    query.filters = filters;
 
-		return query;
+    return query;
   },
   getPayoutModel(cardId) {
-		const basePayout = {};
+    const basePayout = {};
 
     basePayout.destination = cardId;
     basePayout.value = 200;
-    basePayout.currency = "USD";
-    basePayout.firstName = "John";
-    basePayout.lastName = "Doe";
+    basePayout.currency = 'USD';
+    basePayout.firstName = 'John';
+    basePayout.lastName = 'Doe';
 
-		return  basePayout;
-  }
+    return basePayout;
+  },
 };
