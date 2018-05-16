@@ -16,5 +16,12 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^5.1.1"
+  },
+  "bugs": {
+    "url": "https://github.com/Piotrovskyi/checkout-js-library/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Piotrovskyi/checkout-js-library.git"
   }
 }
