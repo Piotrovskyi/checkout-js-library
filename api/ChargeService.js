@@ -43,7 +43,7 @@ class ChargeService extends BaseService {
   }
 
   getChargeHistory(chargeId)  {
-    return this.api.get(ApiUrls.chargeHistory(chargeId), payload);
+    return this.api.get(ApiUrls.chargeHistory(chargeId));
   }
 }
 
