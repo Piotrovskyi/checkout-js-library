@@ -1,5 +1,6 @@
 module.exports = {
   secretKey: 'sk_test_32b9cb39-1cd6-4f86-b750-7069a133667d',
+  publicKey: 'pk_test_763e0a06-2eb2-4ac0-8099-65009064bded',
   getRandomEmail() {
     return this.getRandomString({ length: 10 }) + '@test.com';
   },
@@ -313,4 +314,13 @@ module.exports = {
 
     return basePayout;
   },
+  getCardToken() {
+    return {
+      name: this.getRandomString(),
+      number: '4242424242424242',
+      cvv: '100',
+      expiryMonth: '06',
+      expiryYear: '2018'
+    }
+  }
 };

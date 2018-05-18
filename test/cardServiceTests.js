@@ -108,4 +108,18 @@ describe('Card service tests', function() {
     assert.equal(200, cardResponse.status);
     assert.equal(cardResponse.data.message, 'ok');
   });
+
+  it('Should get card token', async function() {
+    const payload = testHelper.getCardToken();
+    const key = testHelper.publicKey;
+    
+    const cardResponse = await client.cardService.getCardToken(
+      payload,
+      key
+    );
+
+    assert.equal(200, cardResponse.status);
+    assert.equal(cardResponse.data.card.expiryMonth, payload.expiryMonth);
+    assert.equal(cardResponse.data.card.expiryYear, payload.expiryYear);
+  });
 });

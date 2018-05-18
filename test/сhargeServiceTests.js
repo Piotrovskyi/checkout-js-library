@@ -11,30 +11,34 @@ describe('Charge service tests', function() {
 
   it('Verify charge by payment token');
   // it('Verify charge by payment token', async function() {
-  //   const paymentToken = 'pay_tok_4bf11f31-ae5f-4ac6-a942-2105f0f41860'; // set payment token for the JS charge
+  //   const payload = testHelper.getPaymentTokenCreateModel();
+  //   const tokenResponse = await client.tokenService.createPaymentToken(payload);
 
-  //   const chargeResponse = await client.chargeService.verifyCharge(paymentToken);
-
+  //   const chargeResponse = await client.chargeService.verifyCharge(tokenResponse.data.id);
+  //   console.log(chargeResponse)
   //   assert.equal(200, chargeResponse.status);
   //   assert.isNotNull(chargeResponse.data.id);
   // });
 
-  it('Charge with card token');
-  // it('Charge with card token', async function() {
-  //   const cardToken ="card_tok_220E97F3-4DA3-4F09-B7AE-C633D8D5E3E2";// set card token for charge
+  it('Charge with card token', async function() {
+    const cardPayload = testHelper.getCardToken();
+    const key = testHelper.publicKey;
+    
+    const {data} = await client.cardService.getCardToken(
+      cardPayload,
+      key
+    );
 
-  // 	const payload = testHelper.getCardTokenChargeModel(cardToken);
+  	const payload = testHelper.getCardTokenChargeModel(data.id);
 
-  // 	const chargeResponse = await client.chargeService.chargeWithCardToken(payload);
-  // 	const charge = chargeResponse.data;
+    const chargeResponse = await client.chargeService.chargeWithCardToken(payload);
+  	const charge = chargeResponse.data;
+    assert.equal(200, chargeResponse.status);
+  	assert.equal(payload.transactionIndicator,charge.transactionIndicator);
 
-  // 	assert.equal(200, chargeResponse.status);
-  // 	assert.equal(payload.transactionIndicator,charge.transactionIndicator);
+  });
 
-  // 	validateBaseCharge(payload, charge);
-  // });
-
-  it('Create charge with card', async function() {
+  it('Create charge with nonm', async function() {
     const payload = testHelper.getCardChargeModel();
 
     const chargeResponse = await client.chargeService.chargeWithCard(payload);

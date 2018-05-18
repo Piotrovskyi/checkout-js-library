@@ -14,9 +14,10 @@ describe('Token service tests', function() {
     const payload = testHelper.getPaymentTokenCreateModel();
 		const tokenResponse = await client.tokenService.createPaymentToken(payload);
 
-		assert.equal(200, tokenResponse.status);
+    assert.equal(200, tokenResponse.status);
 		assert.isNotNull(tokenResponse.data.id);
   });
+
   it('UpdatePaymentTokenTest', async function() {
     const tokenCreateResponse = await client.tokenService.createPaymentToken(testHelper.getPaymentTokenCreateModel());
 
