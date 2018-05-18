@@ -9,6 +9,7 @@ describe('Charge service tests', function() {
     client = new APIClient({ secretKey: testHelper.secretKey });
   });
 
+  it('Verify charge by payment token');
   // it('Verify charge by payment token', async function() {
   //   const paymentToken = 'pay_tok_4bf11f31-ae5f-4ac6-a942-2105f0f41860'; // set payment token for the JS charge
 
@@ -18,6 +19,7 @@ describe('Charge service tests', function() {
   //   assert.isNotNull(chargeResponse.data.id);
   // });
 
+  it('Charge with card token');
   // it('Charge with card token', async function() {
   //   const cardToken ="card_tok_220E97F3-4DA3-4F09-B7AE-C633D8D5E3E2";// set card token for charge
 

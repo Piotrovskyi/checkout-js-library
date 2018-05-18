@@ -2,7 +2,7 @@ const assert = require('chai').assert;
 const APIClient = require('../ApiClient');
 const testHelper = require('./testHelper');
 
-describe('Charge service tests', function() {
+describe('Validation errors tests', function() {
   let client;
 
   before(async function() {

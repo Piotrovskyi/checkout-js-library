@@ -71,13 +71,26 @@ module.exports = {
     tokenPayload.shippingDetails = this.getRandomAddress();
     return tokenPayload;
   },
-  visaCheckoutTokenCreate(includeBinData) {
-    const tokenPayload = {};
-    tokenPayload.callId = '3023957850660287501';
-    tokenPayload.includeBinData = includeBinData;
+  getPaymentTokenUpdateModel() {
+    const tokenUpdatePayload = {};
 
-    return tokenPayload;
+    tokenUpdatePayload.trackId = 'TRK123456';
+    tokenUpdatePayload.metadata = this.getRandomMetadata();
+    tokenUpdatePayload.udf1 = this.getRandomString({ length: 20 });
+    tokenUpdatePayload.udf2 = this.getRandomString({ length: 20 });
+    tokenUpdatePayload.udf3 = this.getRandomString({ length: 20 });
+    tokenUpdatePayload.udf4 = this.getRandomString({ length: 20 });
+    tokenUpdatePayload.udf5 = this.getRandomString({ length: 20 });
+
+    return tokenUpdatePayload;
   },
+  getVisaCheckoutTokenCreateModel(includeBinData) {
+		const tokenPayload = {};
+		tokenPayload.callId = "3023957850660287501";
+		tokenPayload.includeBinData = includeBinData;
+
+		return tokenPayload;
+	},
   getCardCreateModel() {
     const cardCreate = {};
 
@@ -123,7 +136,7 @@ module.exports = {
   getCardChargeModel() {
     const cardCharge = this.getBaseChargeModel();
     cardCharge.transactionIndicator = '1';
-    cardCharge.chargeMode = '1'
+    cardCharge.chargeMode = '1';
     cardCharge.card = this.getCardCreateModel();
 
     return cardCharge;
@@ -185,7 +198,7 @@ module.exports = {
     cardIdCharge.transactionIndicator = '1';
     cardIdCharge.cardId = cardId;
     cardIdCharge.email = customerEmail;
-    cardIdCharge.chargeMode = '1'
+    cardIdCharge.chargeMode = '1';
 
     return cardIdCharge;
   },
@@ -199,7 +212,7 @@ module.exports = {
     const defaultCardCharge = this.getBaseChargeModel();
     defaultCardCharge.transactionIndicator = '1';
     defaultCardCharge.email = email;
-    defaultCardCharge.chargeMode = '1'
+    defaultCardCharge.chargeMode = '1';
 
     return defaultCardCharge;
   },
