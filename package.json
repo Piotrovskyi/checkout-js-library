@@ -24,7 +24,7 @@
   "license": "MIT",
   "main": "ApiClient.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --timeout 5000"
   },
   "dependencies": {
     "axios": "^0.18.0",
