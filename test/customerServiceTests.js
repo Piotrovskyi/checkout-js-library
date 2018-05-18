@@ -124,7 +124,7 @@ describe('Customer service tests', function() {
     // validateCustomerResponse(customerCreatePayload1, customerListResponse.data.data[1]);
 	});
 
-	it('Get customer list request', async function() {
+	it('Delete customer request', async function() {
 		const customerCreateResponse = await client.customerService.createCustomer(testHelper.getCustomerCreateModel());
 		const deleteResponse = await client.customerService.deleteCustomer(customerCreateResponse.data.id);
 
