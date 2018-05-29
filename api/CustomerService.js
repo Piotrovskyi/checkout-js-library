@@ -43,7 +43,7 @@ class CustomerService extends BaseService {
       apiUrl = UrlHelper.addParameterToUrl(
         apiUrl,
         'fromDate',
-        moment.utc(payload.fromDate).format("YYYY-MM-DDTHH:mm:ss[Z]").toString(),
+        moment.utc(payload.fromDate).format("YYYY-MM-DDTHH:mm:ss[Z]").toString()
       );
     }
 
@@ -51,7 +51,7 @@ class CustomerService extends BaseService {
       apiUrl = UrlHelper.addParameterToUrl(
         apiUrl,
         'toDate',
-        moment.utc(payload.toDate).format("YYYY-MM-DDTHH:mm:ss[Z]").toString(),
+        moment.utc(payload.toDate).format("YYYY-MM-DDTHH:mm:ss[Z]").toString()
       );
     }
 
