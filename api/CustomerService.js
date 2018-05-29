@@ -11,7 +11,7 @@ class CustomerService extends BaseService {
   updateCustomer(customerId, payload) {
     let apiUrl = ApiUrls.customer(customerId);
 
-    if (customerId.includes('@')) {
+    if (customerId.indexOf('@') > -1) {
       apiUrl = ApiUrls.customerEmail(customerId);
     }
 
@@ -21,7 +21,7 @@ class CustomerService extends BaseService {
   getCustomer(customerId) {
     let apiUrl = ApiUrls.customer(customerId);
 
-    if (customerId.includes('@')) {
+    if (customerId.indexOf('@') > -1) {
       apiUrl = ApiUrls.customerEmail(customerId);
     }
 

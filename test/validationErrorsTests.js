@@ -18,7 +18,7 @@ describe('Validation errors tests', function() {
       .createPaymentToken(tokenCreatePayload)
       .catch(err => err);
 
-    assert.equal(true, error.response.data.message.includes('currency'));
+    assert.equal(true, error.response.data.message.indexOf('currency') > -1);
     assert.isNotNull(error.response.data.eventId);
   });
 
@@ -30,8 +30,8 @@ describe('Validation errors tests', function() {
       .createPaymentToken(tokenCreatePayload)
       .catch(err => err);
 
-    assert.equal(true, error.response.data.errorCode.includes('70000'));
-    assert.equal(true, error.response.data.message.includes('Validation'));
+    assert.equal(true, error.response.data.errorCode.indexOf('70000') > -1);
+    assert.equal(true, error.response.data.message.indexOf('Validation') > -1);
     assert.isNotNull(error.response.data.errors);
   });
 });
